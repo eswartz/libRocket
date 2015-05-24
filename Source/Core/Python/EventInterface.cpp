@@ -47,6 +47,7 @@ void EventInterface::InitialisePythonInterface()
 	// Define the event.
 	py_event = python::class_< Event, EventWrapper, boost::noncopyable >("event", python::init< const char*, Rocket::Core::Dictionary&, bool >())
 		.add_property("type", python::make_function( &Event::GetType, python::return_value_policy< python::return_by_value >()))
+		.add_property("phase", python::make_function( &Event::GetPhase, python::return_value_policy< python::return_by_value >()))
 		.add_property("target_element", python::make_function(&Event::GetTargetElement, python::return_value_policy< python::return_by_value >()))
 		.add_property("current_element", python::make_function(&Event::GetCurrentElement, python::return_value_policy< python::return_by_value >()))
 		.add_property("parameters", python::make_function(&EventInterface::GetParameters, python::return_value_policy< python::return_by_value >()))
@@ -54,6 +55,13 @@ void EventInterface::InitialisePythonInterface()
 		.ptr();
 
 	Rocket::Core::Python::ConverterScriptObject< Event >();
+
+    python::enum_< Event::EventPhase >("Phase")
+        .value("UNKNOWN", Event::PHASE_UNKNOWN)
+        .value("CAPTURE", Event::PHASE_CAPTURE)
+        .value("TARGET", Event::PHASE_TARGET)
+        .value("BUBBLE", Event::PHASE_BUBBLE)
+        ;
 }
 
 void EventInterface::InitialiseRocketInterface()
