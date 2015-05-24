@@ -66,6 +66,10 @@ BOOST_PYTHON_MODULE(_rocketcore)
 	python::def("LoadFontFace", LoadFontFace);
 	python::def("RegisterTag", &RegisterTag);
 
+	// EJS
+	python::def("ClearStyleSheetCache", &Rocket::Core::Factory::ClearStyleSheetCache);
+	python::def("ClearTemplateCache", &Rocket::Core::Factory::ClearTemplateCache);
+
 	ContextProxy::InitialisePythonInterface();
 	python::scope().attr("contexts") = ContextProxy();
 
