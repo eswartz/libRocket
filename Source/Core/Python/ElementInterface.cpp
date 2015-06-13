@@ -134,6 +134,7 @@ void ElementInterface::InitialisePythonInterface()
 		.def("CreateTextNode", &ElementInterface::CreateTextNode)
 		.add_property("title", python::make_function(&ElementDocument::GetTitle, python::return_value_policy< python::return_by_value >()), &ElementDocument::SetTitle)
 		.add_property("context", python::make_function(&ElementDocument::GetContext, python::return_value_policy< python::return_by_value >()))
+		.add_property("modal", python::make_function(&ElementDocument::IsModal, python::return_value_policy< python::return_by_value >()))
 		.ptr();
 
 	// The ElementText type.
